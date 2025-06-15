@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Load animal data
 if os.path.exists('data/animals.json'):
-    with open('data/animals.json') as f:
+    with open('Data/animals.json') as f:
         animal_data = json.load(f)
 else:
     animal_data = {}
