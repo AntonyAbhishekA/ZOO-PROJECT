@@ -1,11 +1,19 @@
 from flask import Flask, request, render_template
 import json
+import os
 
 app = Flask(__name__)
 
-# Load animal data
-with open('data/animals.json') as f:
-    animal_data = json.load(f)
+# Load animal data safely, handle if file is missing or invalid
+animal_file = 'data/animals.json'
+if os.path.exists(animal_file):
+    try:
+        with open(animal_file) as f:
+            animal_data = json.load(f)
+    except json.JSONDecodeError:
+        animal_data = {}
+else:
+    animal_data = {}
 
 # Route to display animal info
 @app.route('/animal')
@@ -17,6 +25,6 @@ def animal_info():
     else:
         return "Animal not found", 404
 
-# Start the server and allow connections from other devices
+# Only used for local testing (Render uses gunicorn to start app)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
