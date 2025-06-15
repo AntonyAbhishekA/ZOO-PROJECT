@@ -4,16 +4,17 @@ import os
 
 app = Flask(__name__)
 
-# Load animal data safely, handle if file is missing or invalid
-animal_file = 'data/animals.json'
-if os.path.exists(animal_file):
-    try:
-        with open(animal_file) as f:
-            animal_data = json.load(f)
-    except json.JSONDecodeError:
-        animal_data = {}
+# Load animal data
+if os.path.exists('data/animals.json'):
+    with open('data/animals.json') as f:
+        animal_data = json.load(f)
 else:
     animal_data = {}
+
+# Route to homepage
+@app.route('/')
+def home():
+    return "<h2>Welcome to the Zoo Project 🦁</h2><p>Use a QR code or visit <code>/animal?id=AnimalID</code> to view animal details.</p>"
 
 # Route to display animal info
 @app.route('/animal')
@@ -25,6 +26,6 @@ def animal_info():
     else:
         return "Animal not found", 404
 
-# Only used for local testing (Render uses gunicorn to start app)
+# Run the app
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
