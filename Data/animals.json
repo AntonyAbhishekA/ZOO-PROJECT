@@ -1,1 +1,15 @@
-{}
+{
+    "Tiger01": {
+        "id": "Tiger01",
+        "name": "Bengal Tiger",
+        "species": "Panthera tigris",
+        "fun_facts": "Tigers are good swimmers",
+        "emotion": "Happy",
+        "location": "On the rock",
+        "classification": {
+            "type": "vertebrate",
+            "vertebrate_type": "warm-blooded",
+            "class": "mammal"
+        }
+    }
+}
