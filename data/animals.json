@@ -11,5 +11,17 @@
             "vertebrate_type": "warm-blooded",
             "class": "mammal"
         }
+    },
+    "Snake01": {
+        "id": "Snake01",
+        "name": "King Cobra",
+        "species": "Ophiophagus hannah",
+        "fun_facts": "They spit venom sometimes",
+        "emotion": "Happy",
+        "location": "Under the pot",
+        "classification": {
+            "type": "vertebrate",
+            "class": "Reptile"
+        }
     }
 }
