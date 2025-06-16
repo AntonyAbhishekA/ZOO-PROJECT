@@ -38,5 +38,18 @@
             "type": "vertebrate",
             "class": "reptile"
         }
+    },
+    "Bird01": {
+        "id": "Bird01",
+        "name": "Scarlet Macaw",
+        "species": "Ara macao",
+        "age": "2",
+        "fun_facts": "They can be trained to speak and perform act.",
+        "emotion": "Happy",
+        "location": "Under the pot",
+        "classification": {
+            "type": "vertebrate",
+            "class": "bird"
+        }
     }
 }
