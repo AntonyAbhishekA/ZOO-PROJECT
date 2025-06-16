@@ -1,72 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Add Animal</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        h2 { color: #4CAF50; }
-        form { max-width: 600px; }
-        label { display: block; margin-top: 15px; }
-        input, select, textarea {
-            width: 100%; padding: 10px;
-            margin-top: 5px; box-sizing: border-box;
-        }
-        button {
-            margin-top: 20px; padding: 10px 20px;
-            background-color: #4CAF50; color: white;
-            border: none; cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Add Animal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    label {
+      margin-top: 15px;
+      display: block;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 25px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
-
+  <div class="container">
     <h2>🦁 Add a New Animal</h2>
-
     <form method="POST">
-        <label>Animal ID</label>
-        <input type="text" name="id" required>
+      <label>Animal ID</label>
+      <input type="text" name="id" required>
 
-        <label>Name</label>
-        <input type="text" name="name" required>
+      <label>Name</label>
+      <input type="text" name="name" required>
 
-        <label>Species</label>
-        <input type="text" name="species" required>
+      <label>Species</label>
+      <input type="text" name="species" required>
 
-        <label>Classification Type</label>
-        <select name="type" required>
-            <option value="vertebrate">Vertebrate</option>
-            <option value="invertebrate">Invertebrate</option>
-        </select>
+      <label>Age</label>
+      <input type="number" name="age" required>
 
-        <label>Class</label>
-        <select name="class" required>
-            <option value="">-- Select Class --</option>
-            <option value="mammal">Mammal</option>
-            <option value="bird">Bird</option>
-            <option value="reptile">Reptile</option>
-            <option value="amphibian">Amphibian</option>
-            <option value="fish">Fish</option>
-            <option value="insect">Insect</option>
-            <option value="arachnid">Arachnid</option>
-            <option value="mollusk">Mollusk</option>
-            <option value="crustacean">Crustacean</option>
-            <option value="worm">Worm</option>
-        </select>
-        
-        <label>Age</label>
-        <input type="number" name="age" required>
+      <label>Classification Type</label>
+      <select name="type" required>
+        <option value="vertebrate">Vertebrate</option>
+        <option value="invertebrate">Invertebrate</option>
+      </select>
 
-        <label>Fun Fact</label>
-        <textarea name="fun_facts" required></textarea>
+      <label>Class</label>
+      <select name="class" required>
+        <option value="">-- Select Class --</option>
+        <option value="mammal">Mammal</option>
+        <option value="bird">Bird</option>
+        <option value="reptile">Reptile</option>
+        <option value="amphibian">Amphibian</option>
+        <option value="fish">Fish</option>
+        <option value="insect">Insect</option>
+        <option value="arachnid">Arachnid</option>
+        <option value="mollusk">Mollusk</option>
+        <option value="crustacean">Crustacean</option>
+        <option value="worm">Worm</option>
+      </select>
 
-        <label>Location</label>
-        <input type="text" name="location" required>
+      <label>Fun Fact</label>
+      <textarea name="fun_facts" required></textarea>
 
-        <label>Emotion</label>
-        <input type="text" name="emotion" required>
+      <label>Location</label>
+      <input type="text" name="location" required>
 
-        <button type="submit">Add Animal</button>
+      <label>Emotion</label>
+      <input type="text" name="emotion" required>
+
+      <button type="submit">Add Animal</button>
     </form>
-
+  </div>
 </body>
 </html>
