@@ -55,6 +55,7 @@ def add_animal():
             "id": animal_id,
             "name": request.form['name'],
             "species": request.form['species'],
+            "age": request.form['age'],
             "fun_facts": request.form['fun_facts'],
             "emotion": request.form['emotion'],
             "location": request.form['location'],
