@@ -16,7 +16,6 @@
             background-color: #4CAF50; color: white;
             border: none; cursor: pointer;
         }
-        .msg { color: green; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -33,23 +32,35 @@
         <label>Species</label>
         <input type="text" name="species" required>
 
-        <label>Fun Fact</label>
-        <textarea name="fun_facts" required></textarea>
-
-        <label>Emotion</label>
-        <input type="text" name="emotion" required>
-
-        <label>Location</label>
-        <input type="text" name="location" required>
-
         <label>Classification Type</label>
         <select name="type" required>
             <option value="vertebrate">Vertebrate</option>
             <option value="invertebrate">Invertebrate</option>
         </select>
 
-        <label>Class (e.g., mammal, bird, reptile, insect)</label>
-        <input type="text" name="class" required>
+        <label>Class</label>
+        <select name="class" required>
+            <option value="">-- Select Class --</option>
+            <option value="mammal">Mammal</option>
+            <option value="bird">Bird</option>
+            <option value="reptile">Reptile</option>
+            <option value="amphibian">Amphibian</option>
+            <option value="fish">Fish</option>
+            <option value="insect">Insect</option>
+            <option value="arachnid">Arachnid</option>
+            <option value="mollusk">Mollusk</option>
+            <option value="crustacean">Crustacean</option>
+            <option value="worm">Worm</option>
+        </select>
+
+        <label>Fun Fact</label>
+        <textarea name="fun_facts" required></textarea>
+
+        <label>Location</label>
+        <input type="text" name="location" required>
+
+        <label>Emotion</label>
+        <input type="text" name="emotion" required>
 
         <button type="submit">Add Animal</button>
     </form>
