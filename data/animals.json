@@ -83,5 +83,19 @@
             "type": "vertebrate",
             "class": "mammal"
         }
+    },
+    "Bird02": {
+        "id": "Bird02",
+        "name": "Croswarry",
+        "species": "Casuarius",
+        "age": "3",
+        "fun_facts": "They attack peoples too.",
+        "emotion": "Calm",
+        "location": "Behind the bush.",
+        "image_filename": "croswarry.jpg",
+        "classification": {
+            "type": "vertebrate",
+            "class": "bird"
+        }
     }
 }
