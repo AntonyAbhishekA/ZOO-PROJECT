@@ -69,5 +69,19 @@
             "type": "vertebrate",
             "class": "fish"
         }
+    },
+    "Tiger02": {
+        "id": "Tiger02",
+        "name": "White Tiger",
+        "species": "Panthera tigris",
+        "age": "3",
+        "fun_facts": "White tigers are good swimmers.",
+        "emotion": "Cheerful",
+        "location": "On the rock",
+        "image_filename": "whitetiger.jpg",
+        "classification": {
+            "type": "vertebrate",
+            "class": "mammal"
+        }
     }
 }
