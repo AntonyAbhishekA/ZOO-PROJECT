@@ -7,11 +7,11 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 # Load animal data (fixing path case sensitivity for deployment)
-if os.path.exists('data/animals.json'):
-    with open('data/animals.json') as f:
-        animal_data = json.load(f)
-else:
-    animal_data = {}
+def load_animal_data():
+    if os.path.exists('data/animals.json'):
+        with open('data/animals.json') as f:
+            return json.load(f)
+    return {}
 
 # Route to homepage
 @app.route('/')
@@ -22,6 +22,7 @@ def home():
 @app.route('/animal')
 def animal_info():
     animal_id = request.args.get('id')
+    animal_data = load_animal_data()
     animal = animal_data.get(animal_id)
     if animal:
         return render_template('animal.html', animal=animal)
@@ -31,22 +32,13 @@ def animal_info():
 # Route to add animal
 @app.route('/add', methods=['GET', 'POST'])
 def add_animal():
+    animals = load_animal_data()
     animal_file = "data/animals.json"
 
     # Ensure folders exist
     os.makedirs("data", exist_ok=True)
     os.makedirs("static/qrcodes", exist_ok=True)
     os.makedirs("static/images", exist_ok=True)
-
-    # Load existing animals
-    if os.path.exists(animal_file):
-        with open(animal_file, "r") as f:
-            try:
-                animals = json.load(f)
-            except json.JSONDecodeError:
-                animals = {}
-    else:
-        animals = {}
 
     if request.method == 'POST':
         animal_id = request.form['id'].strip()
