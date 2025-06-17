@@ -59,6 +59,7 @@ def add_animal():
             "fun_facts": request.form['fun_facts'],
             "emotion": request.form['emotion'],
             "location": request.form['location'],
+            "image_filename": request.form.get("image_filename", ""),
             "classification": {
                 "type": request.form['type'],
                 "class": request.form['class']
