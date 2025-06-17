@@ -51,5 +51,19 @@
             "type": "vertebrate",
             "class": "bird"
         }
+    },
+    "Fish01": {
+        "id": "Fish01",
+        "name": "Tiger Shark",
+        "species": "Galeocerdo cuvier",
+        "age": "5",
+        "fun_facts": "They have stripes just like tigers",
+        "emotion": "Calm",
+        "location": "Above the reef",
+        "image_filename": "tigershark.jpg",
+        "classification": {
+            "type": "vertebrate",
+            "class": "fish"
+        }
     }
 }
