@@ -1,6 +1,8 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import json
 import os
+import qrcode
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
@@ -26,15 +28,15 @@ def animal_info():
     else:
         return "Animal not found", 404
 
+# Route to add animal
 @app.route('/add', methods=['GET', 'POST'])
 def add_animal():
-    import qrcode
-
     animal_file = "data/animals.json"
 
     # Ensure folders exist
     os.makedirs("data", exist_ok=True)
     os.makedirs("static/qrcodes", exist_ok=True)
+    os.makedirs("static/images", exist_ok=True)
 
     # Load existing animals
     if os.path.exists(animal_file):
@@ -81,6 +83,22 @@ def add_animal():
         return f"✅ Animal '{animal_data['name']}' added!<br><a href='{qr_link}'>View Animal</a><br>QR code saved at: {qr_path}"
 
     return render_template("add_animal.html")
+
+# Route to handle image uploads
+@app.route('/upload', methods=['POST'])
+def upload_image():
+    if 'image' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+
+    image = request.files['image']
+    if image.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+
+    filename = secure_filename(image.filename)
+    image_path = os.path.join('static/images', filename)
+    image.save(image_path)
+
+    return jsonify({"filename": filename})
 
 # Run the app
 if __name__ == '__main__':
