@@ -7,6 +7,7 @@
         "fun_facts": "Tigers are good swimmers",
         "emotion": "Happy",
         "location": "On the rock",
+        "image_filename": "bengaltiger.jpg",
         "classification": {
             "type": "vertebrate",
             "vertebrate_type": "warm-blooded",
@@ -21,6 +22,7 @@
         "fun_facts": "They spit venom sometimes",
         "emotion": "Happy",
         "location": "Under the pot",
+        "image_filename": "kingcobra.jpg",
         "classification": {
             "type": "vertebrate",
             "class": "Reptile"
@@ -34,6 +36,7 @@
         "fun_facts": "Iguanas also shed skin",
         "emotion": "Calm",
         "location": "On the branch",
+        "image_filename": "greeniguana.jpg",
         "classification": {
             "type": "vertebrate",
             "class": "reptile"
@@ -47,6 +50,7 @@
         "fun_facts": "They can be trained to speak and perform act.",
         "emotion": "Happy",
         "location": "Under the pot",
+        "image_filename": "scarletmacaw.jpg",
         "classification": {
             "type": "vertebrate",
             "class": "bird"
