@@ -4,72 +4,72 @@
   <meta charset="UTF-8">
   <title>Add Animal</title>
   <style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f2f2f2;
-    padding: 40px;
-    display: flex;
-    justify-content: center;
-  }
-  .container {
-    background: white;
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 600px;
-  }
-  h2 {
-    text-align: center;
-    color: #2c3e50;
-  }
-  label {
-    margin-top: 15px;
-    display: block;
-    font-weight: bold;
-  }
-  input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-  }
-  button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 25px;
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  button:hover {
-    background-color: #45a049;
-  }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    label {
+      margin-top: 15px;
+      display: block;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 25px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
 
-  /* Drag and drop area */
-  #drop-area {
-    border: 2px dashed #ccc;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    background: #fdfdfd;
-    margin-top: 10px;
-    border-radius: 10px;
-  }
-  #drop-area:hover {
-    border-color: #4CAF50;
-  }
-  #browse {
-    color: #4CAF50;
-    cursor: pointer;
-    font-weight: bold;
-  }
-</style>
+    /* Drag and drop area */
+    #drop-area {
+      border: 2px dashed #ccc;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      background: #fdfdfd;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+    #drop-area:hover {
+      border-color: #4CAF50;
+    }
+    #browse {
+      color: #4CAF50;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -124,9 +124,64 @@
       </div>
       <input type="hidden" name="image_filename" id="image_filename">
 
-
       <button type="submit">Add Animal</button>
     </form>
   </div>
+
+  <!-- 👇 JavaScript for Drag-and-Drop -->
+  <script>
+    const dropArea = document.getElementById('drop-area');
+    const imageInput = document.getElementById('imageInput');
+    const browse = document.getElementById('browse');
+    const imageFilenameInput = document.getElementById('image_filename');
+
+    // Click behavior
+    browse.addEventListener('click', () => imageInput.click());
+    dropArea.addEventListener('click', () => imageInput.click());
+
+    // Highlight on drag
+    dropArea.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropArea.style.borderColor = '#4CAF50';
+    });
+    dropArea.addEventListener('dragleave', () => {
+      dropArea.style.borderColor = '#ccc';
+    });
+
+    // Drop upload
+    dropArea.addEventListener('drop', e => {
+      e.preventDefault();
+      dropArea.style.borderColor = '#ccc';
+      const file = e.dataTransfer.files[0];
+      uploadImage(file);
+    });
+
+    imageInput.addEventListener('change', () => {
+      const file = imageInput.files[0];
+      uploadImage(file);
+    });
+
+    function uploadImage(file) {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      fetch('/upload', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.filename) {
+          imageFilenameInput.value = data.filename;
+          dropArea.innerHTML = `<p>✅ Uploaded: ${data.filename}</p>`;
+        } else {
+          dropArea.innerHTML = `<p>❌ Upload failed</p>`;
+        }
+      })
+      .catch(() => {
+        dropArea.innerHTML = `<p>❌ Upload failed. Try again.</p>`;
+      });
+    }
+  </script>
 </body>
 </html>
