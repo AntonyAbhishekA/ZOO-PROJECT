@@ -9,11 +9,11 @@ app = Flask(__name__)
 # 🔌 PostgreSQL connection function for Supabase
 def get_db_connection():
     return psycopg2.connect(
-        host="db.nlkanqqdyuigbczycpuy.supabase.co",      # e.g. db.abc.supabase.co
-        database="postgres",              # from your connection string
-        user="postgres",                    # from your connection string
-        password="#Njr10wins",                # from your connection string
-        port=5432                                   # default PostgreSQL port
+        host="db.nlkanqqdyuigbczycpuy.supabase.co",
+        database="postgres",
+        user="postgres",
+        password="#Njr10wins2026",  # 👈 paste here
+        port=5432
     )
 
 # 🏠 Home route
