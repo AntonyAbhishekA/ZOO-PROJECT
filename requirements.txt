@@ -1,5 +1,6 @@
 Flask
-qrcode
 gunicorn
+qrcode
 Pillow
-mysql-connector-python
+psycopg2-binary
+
