@@ -1,19 +1,19 @@
 from flask import Flask, request, render_template, jsonify
-import mysql.connector
+import psycopg2
 import os
 import qrcode
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-# 🔌 MySQL connection function
+# 🔌 PostgreSQL connection function for Supabase
 def get_db_connection():
-    return mysql.connector.connect(
-        host="localhost",
-        port=3307,                      # ✅ updated from 3306
-        user="root",     # Replace with your actual MySQL user
-        password="root", # Replace with your password
-        database="zoo_db"
+    return psycopg2.connect(
+        host="db.nlkanqqdyuigbczycpuy.supabase.co",      # e.g. db.abc.supabase.co
+        database="postgres",              # from your connection string
+        user="postgres",                    # from your connection string
+        password="#Njr10wins",                # from your connection string
+        port=5432                                   # default PostgreSQL port
     )
 
 # 🏠 Home route
@@ -21,19 +21,21 @@ def get_db_connection():
 def home():
     return "<h2>Welcome to the Zoo Project 🦁</h2><p>Use a QR code or visit <code>/animal?id=AnimalID</code> to view animal details.</p>"
 
-# 🔍 Display animal info from MySQL
+# 🔍 Display animal info from PostgreSQL
 @app.route('/animal')
 def animal_info():
     animal_id = request.args.get('id')
 
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
+    cursor = conn.cursor()
     cursor.execute("SELECT * FROM animals WHERE id = %s", (animal_id,))
-    animal = cursor.fetchone()
+    row = cursor.fetchone()
+    colnames = [desc[0] for desc in cursor.description]
     cursor.close()
     conn.close()
 
-    if animal:
+    if row:
+        animal = dict(zip(colnames, row))
         animal["classification"] = {
             "type": animal["classification_type"],
             "class": animal["classification_class"]
@@ -45,14 +47,12 @@ def animal_info():
 # 🐾 Add a new animal via form
 @app.route('/add', methods=['GET', 'POST'])
 def add_animal():
-    # Ensure folders exist
     os.makedirs("static/qrcodes", exist_ok=True)
     os.makedirs("static/images", exist_ok=True)
 
     if request.method == 'POST':
         animal_id = request.form['id'].strip()
 
-        # Check if animal exists
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute("SELECT id FROM animals WHERE id = %s", (animal_id,))
@@ -63,7 +63,6 @@ def add_animal():
             conn.close()
             return "❌ Animal ID already exists. Please go back and use a unique ID.", 400
 
-        # Insert animal into MySQL
         data = (
             animal_id,
             request.form['name'],
@@ -78,16 +77,16 @@ def add_animal():
         )
 
         cursor.execute("""
-            INSERT INTO animals (id, name, species, age, fun_facts, emotion, location,
-                                 classification_type, classification_class, image_filename)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO animals (
+                id, name, species, age, fun_facts, emotion, location,
+                classification_type, classification_class, image_filename
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """, data)
 
         conn.commit()
         cursor.close()
         conn.close()
 
-        # Generate QR code
         qr_link = f"https://zoo-project-kiny.onrender.com/animal?id={animal_id}"
         img = qrcode.make(qr_link)
         qr_path = f"static/qrcodes/{animal_id}_qr.png"
