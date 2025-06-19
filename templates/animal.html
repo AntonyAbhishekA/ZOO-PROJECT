@@ -71,9 +71,10 @@
     
     <p><strong>Classification:</strong> {{ animal.classification.type|capitalize }} - {{ animal.classification.class|capitalize }}</p>
 
-    {% if request.remote_addr == '127.0.0.1' %}
+    {% if session.admin %}
       <a href="/add" class="back-link">➕ Add Another Animal</a>
     {% endif %}
+
 
   </div>
 
