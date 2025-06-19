@@ -46,36 +46,37 @@
     .back-link:hover {
       text-decoration: underline;
     }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
 
   <div class="card">
-
-   {% if animal.image_filename %}
-     <img src="{{ url_for('static', filename='images/' + animal.image_filename) }}"
-       alt="{{ animal.name }}"
-       style="max-width: 100%; border-radius: 10px; margin-bottom: 20px;">
-   {% endif %}
-
     <h1>{{ animal.name }}</h1>
+
+    {% if animal.image_filename %}
+      <img src="{{ url_for('static', filename='images/' + animal.image_filename) }}" alt="{{ animal.name }}">
+    {% endif %}
+
     <p><strong>Species:</strong> {{ animal.species }}</p>
 
     {% if animal.age %}
-    <p><strong>Age:</strong> {{ animal.age }}</p>
+      <p><strong>Age:</strong> {{ animal.age }}</p>
     {% endif %}
 
     <p><strong>Fun Fact:</strong> {{ animal.fun_facts }}</p>
     <p><strong>Emotion:</strong> {{ animal.emotion }}</p>
     <p><strong>Location in Enclosure:</strong> {{ animal.location }}</p>
-    
     <p><strong>Classification:</strong> {{ animal.classification.type|capitalize }} - {{ animal.classification.class|capitalize }}</p>
 
-    {% if session.admin %}
+    {% if session.logged_in %}
       <a href="/add" class="back-link">➕ Add Another Animal</a>
     {% endif %}
-
-
   </div>
 
 </body>

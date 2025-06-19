@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, session
+from flask import Flask, request, render_template, redirect, url_for, session, jsonify
 import psycopg2
 import os
 import qrcode
@@ -141,7 +141,9 @@ def upload_image():
         return jsonify({"error": "No selected file"}), 400
 
     filename = secure_filename(image.filename)
-    image.save(os.path.join('static/images', filename))
+    image_path = os.path.join('static/images', filename)
+    image.save(image_path)
+
     return jsonify({"filename": filename})
 
 # ▶️ Run
