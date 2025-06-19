@@ -1,11 +1,11 @@
-from flask import Flask, request, render_template, jsonify, redirect, url_for, session
+from flask import Flask, request, render_template, redirect, url_for, session
 import psycopg2
 import os
 import qrcode
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = 'c6f519b2cfdb44aeadcbb0f5d098e8b8e58d2d7e7e16cfdff933e5f39c5dcb3d' # 🔐 Set a strong secret key for session security
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "fallback-secret-key") # 🔐 Set a strong secret key for session security
 
 
 # 🔌 PostgreSQL connection function for Supabase
@@ -56,13 +56,19 @@ def animal_info():
 # 🔐 Admin Login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error = None
     if request.method == 'POST':
-        if request.form['username'] == 'admin' and request.form['password'] == 'zoo123':
-            session['admin'] = True
+        username = request.form['username']
+        password = request.form['password']
+
+        # Change these credentials as needed
+        if username == 'admin' and password == 'zoo@admin123':
+            session['logged_in'] = True
             return redirect(url_for('add_animal'))
         else:
-            return "❌ Invalid credentials", 401
-    return render_template('login.html')
+            error = "Invalid credentials. Please try again."
+
+    return render_template("login.html", error=error)
 
 # 🚪 Admin Logout
 @app.route('/logout')
