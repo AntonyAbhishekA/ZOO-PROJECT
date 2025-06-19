@@ -74,7 +74,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('home'))
+    return redirect(url_for('login'))
 
 # ➕ Add Animal (Admin Only)
 @app.route('/add', methods=['GET', 'POST'])
