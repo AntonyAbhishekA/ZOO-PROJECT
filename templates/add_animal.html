@@ -74,7 +74,7 @@
 <body>
   <div class="container">
     <h2>🦁 Add a New Animal</h2>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
       <label>Animal ID</label>
       <input type="text" name="id" required>
 
@@ -126,62 +126,55 @@
 
       <button type="submit">Add Animal</button>
     </form>
+    <a href="/logout" style="display: inline-block; margin-top: 20px; color: red;">🔓 Logout</a>
   </div>
 
   <!-- 👇 JavaScript for Drag-and-Drop -->
   <script>
-    const dropArea = document.getElementById('drop-area');
-    const imageInput = document.getElementById('imageInput');
-    const browse = document.getElementById('browse');
-    const imageFilenameInput = document.getElementById('image_filename');
+  const dropArea = document.getElementById("drop-area");
+  const fileInput = document.getElementById("imageInput");
+  const hiddenInput = document.getElementById("image_filename");
 
-    // Click behavior
-    browse.addEventListener('click', () => imageInput.click());
-    dropArea.addEventListener('click', () => imageInput.click());
+  function uploadFile(file) {
+    const formData = new FormData();
+    formData.append("image", file);
 
-    // Highlight on drag
-    dropArea.addEventListener('dragover', e => {
-      e.preventDefault();
-      dropArea.style.borderColor = '#4CAF50';
+    fetch("/upload", {
+      method: "POST",
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.filename) {
+        hiddenInput.value = data.filename;
+        dropArea.innerHTML = "✅ Image uploaded: " + data.filename;
+      } else {
+        dropArea.innerHTML = "❌ Upload failed. Try again.";
+      }
+    })
+    .catch(() => {
+      dropArea.innerHTML = "❌ Upload failed. Try again.";
     });
-    dropArea.addEventListener('dragleave', () => {
-      dropArea.style.borderColor = '#ccc';
-    });
+  }
 
-    // Drop upload
-    dropArea.addEventListener('drop', e => {
-      e.preventDefault();
-      dropArea.style.borderColor = '#ccc';
-      const file = e.dataTransfer.files[0];
-      uploadImage(file);
-    });
-
-    imageInput.addEventListener('change', () => {
-      const file = imageInput.files[0];
-      uploadImage(file);
-    });
-
-    function uploadImage(file) {
-      const formData = new FormData();
-      formData.append('image', file);
-
-      fetch('/upload', {
-        method: 'POST',
-        body: formData
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.filename) {
-          imageFilenameInput.value = data.filename;
-          dropArea.innerHTML = `<p>✅ Uploaded: ${data.filename}</p>`;
-        } else {
-          dropArea.innerHTML = `<p>❌ Upload failed</p>`;
-        }
-      })
-      .catch(() => {
-        dropArea.innerHTML = `<p>❌ Upload failed. Try again.</p>`;
-      });
-    }
-  </script>
+  dropArea.addEventListener("click", () => fileInput.click());
+  dropArea.addEventListener("dragover", e => {
+    e.preventDefault();
+    dropArea.style.borderColor = "green";
+  });
+  dropArea.addEventListener("dragleave", e => {
+    e.preventDefault();
+    dropArea.style.borderColor = "#ccc";
+  });
+  dropArea.addEventListener("drop", e => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file) uploadFile(file);
+  });
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (file) uploadFile(file);
+  });
+</script>
 </body>
 </html>
