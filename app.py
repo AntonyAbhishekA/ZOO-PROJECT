@@ -61,8 +61,8 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        # Change these credentials as needed
         if username == 'admin' and password == 'zoo@admin123':
+            session.permanent = True
             session['logged_in'] = True
             return redirect(url_for('add_animal'))
         else:
@@ -73,13 +73,13 @@ def login():
 # 🚪 Admin Logout
 @app.route('/logout')
 def logout():
-    session.pop('admin', None)
+    session.clear()
     return redirect(url_for('home'))
 
 # ➕ Add Animal (Admin Only)
 @app.route('/add', methods=['GET', 'POST'])
 def add_animal():
-    if not session.get('admin'):
+    if not session.get('logged_in'):
         return redirect(url_for('login'))
 
     os.makedirs("static/qrcodes", exist_ok=True)
