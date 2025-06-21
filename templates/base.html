@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Zoo Project{% endblock %}</title>
+  <style>
+    /* 🌗 Theme Styling */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .dark-mode {
+      --bg-color: #1e1e1e;
+      --text-color: #f1f1f1;
+    }
+
+    .light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* 🧱 Shared Layout Styles */
+    .container, .login-container, .card {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 600px;
+      margin: 40px auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    label {
+      margin-top: 15px;
+      display: block;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 25px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #4CAF50;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* 📷 Drag & Drop Upload Area */
+    #drop-area {
+      border: 2px dashed #ccc;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      background: #fdfdfd;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+
+    #drop-area:hover {
+      border-color: #4CAF50;
+    }
+
+    #browse {
+      color: #4CAF50;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body class="light-mode" id="theme">
+
+  <button class="toggle-btn" onclick="toggleMode()">🌙</button>
+
+  {% block content %}{% endblock %}
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'light-mode';
+    document.getElementById('theme').className = theme;
+    document.querySelector('.toggle-btn').innerText = theme === 'dark-mode' ? '☀️' : '🌙';
+
+    function toggleMode() {
+      const current = document.getElementById('theme').className;
+      const newMode = current === 'light-mode' ? 'dark-mode' : 'light-mode';
+      document.getElementById('theme').className = newMode;
+      document.querySelector('.toggle-btn').innerText = newMode === 'dark-mode' ? '☀️' : '🌙';
+      localStorage.setItem('theme', newMode);
+    }
+  </script>
+
+</body>
+</html>

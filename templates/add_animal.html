@@ -1,77 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Add Animal</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f2f2f2;
-      padding: 40px;
-      display: flex;
-      justify-content: center;
-    }
-    .container {
-      background: white;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 600px;
-    }
-    h2 {
-      text-align: center;
-      color: #2c3e50;
-    }
-    label {
-      margin-top: 15px;
-      display: block;
-      font-weight: bold;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 25px;
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
+{% extends 'base.html' %}
 
-    /* Drag and drop area */
-    #drop-area {
-      border: 2px dashed #ccc;
-      padding: 20px;
-      text-align: center;
-      cursor: pointer;
-      background: #fdfdfd;
-      margin-top: 10px;
-      border-radius: 10px;
-    }
-    #drop-area:hover {
-      border-color: #4CAF50;
-    }
-    #browse {
-      color: #4CAF50;
-      cursor: pointer;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
+{% block title %}Page Title Here{% endblock %}
+
+{% block content %}
   <div class="container">
     <h2>🦁 Add a New Animal</h2>
     <form method="POST" enctype="multipart/form-data">
@@ -129,6 +60,7 @@
     <a href="/logout" style="display: inline-block; margin-top: 20px; color: red;">🔓 Logout</a>
   </div>
 
+
   <!-- 👇 JavaScript for Drag-and-Drop -->
   <script>
   const dropArea = document.getElementById("drop-area");
@@ -176,6 +108,4 @@
     if (file) uploadFile(file);
   });
 </script>
-{% include "_darkmode.html" %}
-</body>
-</html>
+{% endblock %}
