@@ -146,6 +146,20 @@ def upload_image():
 
     return jsonify({"filename": filename})
 
+# 🐾 View All Animals
+@app.route('/animals')
+def view_all_animals():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, name, species FROM animals ORDER BY name")
+    rows = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    animals = [{"id": row[0], "name": row[1], "species": row[2]} for row in rows]
+    return render_template("all_animals.html", animals=animals)
+
+
 # ▶️ Run
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

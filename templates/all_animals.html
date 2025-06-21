@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Animals</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .animal-list {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .animal-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    .animal-card h3 {
+      margin: 10px 0 5px;
+    }
+    .animal-card a {
+      text-decoration: none;
+      color: #4CAF50;
+      font-weight: bold;
+    }
+    .animal-card a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>🐾 All Animals in the Zoo</h1>
+  <div class="animal-list">
+    {% for animal in animals %}
+      <div class="animal-card">
+        <h3>{{ animal.name }}</h3>
+        <p><em>{{ animal.species }}</em></p>
+        <a href="/animal?id={{ animal.id }}">🔍 View Info</a>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
