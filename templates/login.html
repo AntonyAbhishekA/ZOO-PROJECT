@@ -67,9 +67,10 @@
       <button type="submit">Login</button>
 
       {% if error %}
-        <p class="error">{{ error }}</p>
+        <p style="color: red;">{{ error }}</p>
       {% endif %}
     </form>
   </div>
+{% include "_darkmode.html" %}
 </body>
 </html>

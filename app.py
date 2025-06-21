@@ -21,7 +21,7 @@ def get_db_connection():
 # 🏠 Home
 @app.route('/')
 def home():
-    return "<h2>Welcome to the Zoo Project 🦁</h2><p>Scan a QR code or visit /animal?id=AnimalID to view animal details.</p>"
+    return render_template("home.html")
 
 # 🔍 View Animal Info
 @app.route('/animal')
