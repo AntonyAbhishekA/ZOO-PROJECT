@@ -4,38 +4,17 @@
   <meta charset="UTF-8">
   <title>{% block title %}Zoo Project{% endblock %}</title>
   <style>
-    /* 🌗 Theme Styling */
+    /* 🎨 Base Styling */
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s, color 0.3s;
+      background-color: #f4f7f6; /* A soft, light gray background */
+      color: #333;
       margin: 0;
       padding: 20px;
     }
 
-    .dark-mode {
-      --bg-color: #1e1e1e;
-      --text-color: #f1f1f1;
-    }
-
-    .light-mode {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-    }
-
-    .toggle-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      background: none;
-      border: none;
-      font-size: 20px;
-      cursor: pointer;
-    }
-
     a {
-      color: inherit;
+      color: #007BFF; /* A standard, recognizable link color */
     }
 
     /* 🧱 Shared Layout Styles */
@@ -51,7 +30,7 @@
 
     h1, h2 {
       text-align: center;
-      color: #2c3e50;
+      color: #2c3e50; /* A dark, professional blue-gray */
     }
 
     label {
@@ -72,7 +51,7 @@
       width: 100%;
       padding: 12px;
       margin-top: 25px;
-      background-color: #4CAF50;
+      background-color: #4CAF50; /* A pleasant green */
       border: none;
       color: white;
       font-size: 16px;
@@ -131,25 +110,9 @@
     }
   </style>
 </head>
-<body class="light-mode" id="theme">
-
-  <button class="toggle-btn" onclick="toggleMode()">🌙</button>
+<body>
 
   {% block content %}{% endblock %}
-
-  <script>
-    const theme = localStorage.getItem('theme') || 'light-mode';
-    document.getElementById('theme').className = theme;
-    document.querySelector('.toggle-btn').innerText = theme === 'dark-mode' ? '☀️' : '🌙';
-
-    function toggleMode() {
-      const current = document.getElementById('theme').className;
-      const newMode = current === 'light-mode' ? 'dark-mode' : 'light-mode';
-      document.getElementById('theme').className = newMode;
-      document.querySelector('.toggle-btn').innerText = newMode === 'dark-mode' ? '☀️' : '🌙';
-      localStorage.setItem('theme', newMode);
-    }
-  </script>
 
 </body>
 </html>
