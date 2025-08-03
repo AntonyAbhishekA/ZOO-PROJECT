@@ -7,14 +7,14 @@
     /* 🎨 Base Styling */
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f7f6; /* A soft, light gray background */
+      background-color: #ffffff; /* Changed to white for a cleaner base */
       color: #333;
       margin: 0;
-      padding: 20px;
+      padding: 0; /* Changed from 20px to 0 to allow full-width sections */
     }
 
     a {
-      color: #007BFF; /* A standard, recognizable link color */
+      color: #007BFF;
     }
 
     /* 🧱 Shared Layout Styles */
@@ -30,7 +30,7 @@
 
     h1, h2 {
       text-align: center;
-      color: #2c3e50; /* A dark, professional blue-gray */
+      color: #2c3e50;
     }
 
     label {
@@ -51,7 +51,7 @@
       width: 100%;
       padding: 12px;
       margin-top: 25px;
-      background-color: #4CAF50; /* A pleasant green */
+      background-color: #4CAF50;
       border: none;
       color: white;
       font-size: 16px;
@@ -107,6 +107,63 @@
       max-width: 100%;
       border-radius: 10px;
       margin-bottom: 20px;
+    }
+
+    /* 🦁 Hero Section Styles (Added Here) */
+    .hero-section {
+      position: relative;
+      height: 80vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      background-image: url('https://images.unsplash.com/photo-1560783935-4654373a45a8');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin: 0;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 700;
+      margin: 10px 0 30px 0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .timing-box {
+      display: inline-block;
+      background-color: rgba(44, 62, 80, 0.8);
+      padding: 10px 25px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      font-size: 1.1rem;
+    }
+
+    .timing-box p {
+      margin: 0;
     }
   </style>
 </head>
