@@ -152,7 +152,44 @@
       text-transform: uppercase;
       color: #fff;
     }
-    
+
+    /* 🧭 Icon Navigation Section */
+   .icon-nav {
+     display: flex;
+     justify-content: center;
+     flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+     gap: 20px;
+     padding: 50px 20px;
+     background-color: #f4f7f6; /* Light gray background to separate from hero */
+    }
+
+   .icon-nav-item {
+     background-color: #ffffff;
+     width: 200px;
+     padding: 25px 15px;
+     border-radius: 10px;
+     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+     text-align: center;
+     text-decoration: none;
+     color: #2c3e50;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+   .icon-nav-item:hover {
+     transform: translateY(-8px);
+     box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+   .nav-icon {
+     font-size: 3.5rem; /* Emojis are treated like text, so we can change their size */
+     margin-bottom: 15px;
+     line-height: 1;
+    }
+
+   .nav-icon-title {
+     font-weight: 600;
+     font-size: 1rem;
+    }
   </style>
 </head>
 <body>
